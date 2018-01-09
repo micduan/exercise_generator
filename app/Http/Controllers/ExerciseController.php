@@ -28,6 +28,7 @@ class ExerciseController extends Controller
         $exercise = new exercise;
         $exercise->name = request('name');
         $exercise->difficulty = request('difficulty');
+        $exercise->user_id = auth()->id();
         $exercise->save();
         return view('add');
     }
@@ -35,6 +36,12 @@ class ExerciseController extends Controller
     public function track()
     {
         return view('track');
+    }
+
+    public function show()
+    {
+        $exercises = exercise::all()->where('user_id', '=', auth()->id());
+        return view('exercises.show', compact('exercises'));
     }
 
 

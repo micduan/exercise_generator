@@ -86,6 +86,7 @@
             <a href="/add">Add</a>
             <a href="/generate">Generate</a>
             <a href="/track">Chart</a>
+            <a href="/exercises">My Exercises</a>
         </div>
     </div>
 </div>

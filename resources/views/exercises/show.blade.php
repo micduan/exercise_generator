@@ -1,5 +1,3 @@
-@extends('layouts.app')
-
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -26,7 +24,6 @@
         .full-height {
             height: 100vh;
         }
-
 
         .position-ref {
             position: relative;
@@ -62,40 +59,33 @@
     </style>
 </head>
 <body>
-@section('content')
 <div class="flex-center position-ref full-height">
+    @if (Route::has('login'))
+        <div class="top-right links">
+            @auth
+                <a href="{{ url('/home') }}">Home</a>
+            @else
+                <a href="{{ route('login') }}">Login</a>
+                <a href="{{ route('register') }}">Register</a>
+            @endauth
+        </div>
+    @endif
+
     <div class="content">
         <div class="title m-b-md">
-            Add An Exercise
+            My List of Exercises
         </div>
 
-        <form method="POST" action="/add">
-            {{ csrf_field() }}
-            <div class="form-group">
-                <label for="Exercise">Exercise:</label>
-                <input type="text" class="form-control" id="name" name="name" required>
-            </div>
-
-            <div class="form-group">
-                <label for="Difficulty">Difficulty:</label>
-                <input type="radio" class="form-control" id="difficulty" name="difficulty" value="easy" required>
-                <input type="radio" class="form-control" id="difficulty" name="difficulty" value="medium" required>
-                <input type="radio" class="form-control" id="difficulty" name="difficulty" value="hard" required>
-            </div>
-
-            <button type="submit" class="btn btn-default">Submit</button>
-
-        </form>
-        <div class="alert alert-error">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li> {{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
 
     </div>
+
+    @foreach ($exercises as $exercise)
+        <h1> {{ $exercise->name }}</h1>
+
+
+        @endforeach
+
+
 </div>
-@endsection
 </body>
 </html>

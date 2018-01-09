@@ -21,4 +21,8 @@ Route::post('/schedule', 'ScheduleController@store');
 
 Route::get('/track', 'ExerciseController@track');
 
+Route::get('/exercises', 'ExerciseController@show');
 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
